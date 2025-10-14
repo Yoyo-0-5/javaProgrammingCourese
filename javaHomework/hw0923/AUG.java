@@ -23,4 +23,14 @@ public class AUG extends Rifle {
     public void zoomOut() {
         System.out.println("透過望遠鏡來查看敵人");
     }
+    
+    @Override
+    public String getGunName() {
+        return "狙擊槍";
+    }
+    
+    @Override
+    public int getDamage() {
+        return 45;
+    }
 }

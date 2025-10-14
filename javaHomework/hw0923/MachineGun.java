@@ -19,6 +19,7 @@ public class MachineGun extends AbstractGun {
         System.out.println("填裝機槍彈夾");
     }
 
+    @Override
     public void changeModel(int i) {
         this.model = i;
         if (model == 0) {
@@ -28,5 +29,15 @@ public class MachineGun extends AbstractGun {
         } else {
             System.out.println("關保險");
         }
+    }
+    
+    @Override
+    public String getGunName() {
+        return "機槍";
+    }
+    
+    @Override
+    public int getDamage() {
+        return 30;
     }
 }

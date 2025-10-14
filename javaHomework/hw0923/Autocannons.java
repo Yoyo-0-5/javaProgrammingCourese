@@ -15,4 +15,14 @@ public class Autocannons extends MachineGun {
     public void erect() {
         System.out.println("架設機砲中...");
     }
+    
+    @Override
+    public String getGunName() {
+        return "機砲";
+    }
+    
+    @Override
+    public int getDamage() {
+        return 35;  // 機砲傷害力較高
+    }
 }

@@ -13,4 +13,14 @@ public class AK47 extends Rifle {
             System.out.println("無法射擊");
         }
     }
+    
+    @Override
+    public String getGunName() {
+        return "AK47步槍";
+    }
+    
+    @Override
+    public int getDamage() {
+        return 28;
+    }
 }

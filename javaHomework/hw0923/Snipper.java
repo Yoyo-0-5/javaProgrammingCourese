@@ -5,12 +5,15 @@ public class Snipper extends Soldier {
 
     public Snipper(String name) {
         super(name);
+        this.setProfession("狙擊手");  // 設定職業別
     }
 
     @Override
     public void setGun(AbstractGun gun) {
+        System.out.println("玩家 " + name + " 選取了 " + gun.getGunName());
+        
         if (gun instanceof AUG) {
-            super.setGun(null);
+            super.setGun(gun);
             this.aug = (AUG) gun;
         } else if (gun instanceof Cannon) {
             System.out.println("狙擊手無法使用機砲");
@@ -27,13 +30,19 @@ public class Snipper extends Soldier {
     }
 
     @Override
-    public void killeEnemy(String name) {
-        System.out.println("狙擊手開始殺敵");
+    public void killeEnemy(Soldier soldier) {
+        System.out.println(getProfession() + " " + name + " 瞄準殺敵 " + soldier.getName());
+        System.out.println(getProfession() + " " + name + " zoom in 和 zoom out");
+        
         if (aug != null) {
             aug.zoomOut();
             aug.shoot();
+            // 攻擊對方
+            soldier.attack(this, aug);
         } else if (gun != null) {
             gun.shoot();
+            // 攻擊對方
+            soldier.attack(this, gun);
         }
     }
 }

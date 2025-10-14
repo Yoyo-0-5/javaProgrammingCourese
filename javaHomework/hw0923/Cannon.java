@@ -11,4 +11,14 @@ public class Cannon extends MachineGun {
             System.out.println("無法射擊");
         }
     }
+    
+    @Override
+    public String getGunName() {
+        return "砲";
+    }
+    
+    @Override
+    public int getDamage() {
+        return 30;
+    }
 }

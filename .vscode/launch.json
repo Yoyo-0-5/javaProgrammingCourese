@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
             "name": "Client",
             "request": "launch",
             "mainClass": "javaHomework.hw0923.Client",

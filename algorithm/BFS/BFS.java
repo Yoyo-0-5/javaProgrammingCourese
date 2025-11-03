@@ -10,7 +10,8 @@ public class BFS {
         Graph<String> graph = generateGraph();
         computeBFS(graph, graph.getAdjNodes(new Node<String>("A"))[0]);
     }
-
+    
+    @SuppressWarnings("unchecked")
     private Graph<String> generateGraph() {
         Graph<String> graph = new Graph<String>();
         Node<String> a = new Node<String>("A");

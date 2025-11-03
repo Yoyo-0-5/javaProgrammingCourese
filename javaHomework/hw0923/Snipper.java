@@ -30,7 +30,7 @@ public class Snipper extends Soldier {
     }
 
     @Override
-    public void killeEnemy(Soldier soldier) {
+    public void fire(Soldier soldier) {
         System.out.println(getProfession() + " " + name + " 瞄準殺敵 " + soldier.getName());
         System.out.println(getProfession() + " " + name + " zoom in 和 zoom out");
         

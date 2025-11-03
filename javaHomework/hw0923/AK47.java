@@ -1,6 +1,15 @@
 package javaHomework.hw0923;
 
 public class AK47 extends Rifle {
+
+    public AK47() {
+        super(45, 0.4);
+    }
+
+    public AK47(int gunDamage, double gunHitRate) {
+        super(gunDamage, gunHitRate);
+    }
+    
     @Override
     public void shoot() {
         if (model == 0) {
@@ -19,8 +28,4 @@ public class AK47 extends Rifle {
         return "AK47步槍";
     }
     
-    @Override
-    public int getDamage() {
-        return 28;
-    }
 }

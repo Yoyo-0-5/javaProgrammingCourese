@@ -49,6 +49,7 @@ public class DFS {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public Graph<String> createGraph() {
         Node<String> u = new Node<>("U");
         Node<String> v = new Node<>("V");

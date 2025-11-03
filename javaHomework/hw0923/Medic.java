@@ -22,11 +22,11 @@ public class Medic extends Soldier {
     }
 
     @Override
-    public void killeEnemy(Soldier soldier) {
+    public void fire(Soldier soldier) {
         if (gun != null) {
             System.out.println(getProfession() + " " + name + " 攻擊 " + soldier.getName());
             gun.shoot();
-            System.out.print("使用了 " + gun.getGunName());
+            System.out.println("使用了 " + gun.getGunName());
             // 攻擊對方
             soldier.attack(this, gun);
         }

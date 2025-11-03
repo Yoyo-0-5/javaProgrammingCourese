@@ -27,6 +27,7 @@ public class Graph<T extends Comparable<T>> {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public Node<T>[] getNode() {
         Node<T>[] nodes = new Node[graph.size()];
         for(int i = 0; i < graph.size(); i++) {

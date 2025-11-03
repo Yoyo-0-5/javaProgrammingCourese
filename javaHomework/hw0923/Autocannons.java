@@ -1,6 +1,15 @@
 package javaHomework.hw0923;
 
 public class Autocannons extends MachineGun {
+
+    public Autocannons() {
+        super(50, 0.1);
+    }
+
+    public Autocannons(int gunDamage, double gunHitRate) {
+        super(gunDamage, gunHitRate);
+    }
+
     @Override
     public void shoot() {
         if (model == 0) {
@@ -19,10 +28,5 @@ public class Autocannons extends MachineGun {
     @Override
     public String getGunName() {
         return "機砲";
-    }
-    
-    @Override
-    public int getDamage() {
-        return 35;  // 機砲傷害力較高
     }
 }

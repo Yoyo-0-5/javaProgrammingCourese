@@ -3,24 +3,25 @@ package javaHomework.hw0923;
 public class Client {
     public static void main(String[] args) {
 
-        Soldier a = new Riflemen("玩家A");
-        Soldier b = new Snipper("Computer");
+        Soldier a = new MachineGunner("玩家A");
+        Soldier b = new MedicalSoldier("Computer");
         
         System.out.println("玩家" + a.getName() + " 選擇" + 
                          a.getProfession() + "角色加入戰場!!");
         System.out.println("玩家" + b.getName() + " 選擇" + 
                          b.getProfession() + "角色加入戰場!!");
         System.out.println();
-        
-        Rifle gunA = new AK47();
+
+        AbstractGun gunA = new GunFactory().generateGun(Autocannons.class);
         a.setGun(gunA);
         
-        Rifle gunB = new AUG();
+        AbstractGun gunB = new GunFactory().generateGun(M1911.class);
         b.setGun(gunB);
         System.out.println();
         
-        a.changeModel(0);
+        a.changeModel(1);
         b.changeModel(0);
+        System.out.println();
 
         a.killeEnemy(b);
         

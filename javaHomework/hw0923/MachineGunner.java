@@ -30,19 +30,19 @@ public class MachineGunner extends Soldier {
     }
 
     @Override
-    public void killeEnemy(Soldier soldier) {
+    public void fire(Soldier soldier) {
         System.out.println(getProfession() + " " + name + " 瞄準殺敵 " + soldier.getName());
         System.out.println(getProfession() + " " + name);
         
         if (aut != null) {
             aut.erect();
             aut.shoot();
-            System.out.print("使用了 " + aut.getGunName());
+            System.out.println("使用了 " + aut.getGunName());
             // 攻擊對方
             soldier.attack(this, aut);
         } else if (gun != null) {
             gun.shoot();
-            System.out.print("使用了 " + gun.getGunName());
+            System.out.println("使用了 " + gun.getGunName());
             // 攻擊對方
             soldier.attack(this, gun);
         }

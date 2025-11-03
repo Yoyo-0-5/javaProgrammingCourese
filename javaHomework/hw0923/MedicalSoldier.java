@@ -26,17 +26,17 @@ public class MedicalSoldier extends Soldier {
     }
 
     @Override
-    public void killeEnemy(Soldier soldier) {
+    public void fire(Soldier soldier) {
         System.out.println(getProfession() + " " + name + " 攻擊 " + soldier.getName());
         
         if (m1911 != null) {
             m1911.shoot();
-            System.out.print("使用了 " + m1911.getGunName());
+            System.out.println("使用了 " + m1911.getGunName());
             // 攻擊對方
             soldier.attack(this, m1911);
         } else if (gun != null) {
             gun.shoot();
-            System.out.print("使用了 " + gun.getGunName());
+            System.out.println("使用了 " + gun.getGunName());
             // 攻擊對方
             soldier.attack(this, gun);
         }

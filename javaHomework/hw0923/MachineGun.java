@@ -1,7 +1,15 @@
 package javaHomework.hw0923;
 
 public class MachineGun extends AbstractGun {
-    protected int model; // 0: 單發, 1: 連續射擊, 其他: 保險
+    protected int model;
+
+    public MachineGun() {
+        super(50, 0.1);
+    }
+
+    public MachineGun(int gunDamage, double gunHitRate) {
+        super(gunDamage, gunHitRate);
+    }
 
     @Override
     public void shoot() {
@@ -24,10 +32,15 @@ public class MachineGun extends AbstractGun {
         this.model = i;
         if (model == 0) {
             System.out.println("切換至單發擊出模式");
+            numberOfShoot = 1;
+            gunHitRateBasedContinuousShooting = 1.0;
         } else if (model == 1) {
             System.out.println("切換至連續射擊");
+            numberOfShoot = 10;
+            gunHitRateBasedContinuousShooting = 0.1;
         } else {
             System.out.println("關保險");
+            numberOfShoot = 0;
         }
     }
     
@@ -36,8 +49,4 @@ public class MachineGun extends AbstractGun {
         return "機槍";
     }
     
-    @Override
-    public int getDamage() {
-        return 30;
-    }
 }

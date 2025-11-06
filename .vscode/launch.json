@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FlowLayoutWindows",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1028.FlowLayoutWindows",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
+            "name": "JavaWindows",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1028.JavaWindows",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
+            "name": "PrimeExecutor",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1021.PrimeExecutor",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
+            "name": "PrimeCallable",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1021.PrimeCallable",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
+            "name": "PrimeRunnable",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1021.PrimeRunnable",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
+            "name": "Prime",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1021.Prime",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
             "name": "GeneticAlgorithm",
             "request": "launch",
             "mainClass": "algorithm.GeneticAlgorithm.GeneticAlgorithm",

@@ -3,124 +3,197 @@ package algorithm.Problem;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import algorithm.Problem.Knapsack.KnapsackProblem;
+// import algorithm.Problem.Knapsack.KnapsackProblem;
+import algorithm.Problem.TSP.TSPProblem;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked" })
 public class GeneticAlgorithm<T> {
     
     Random rand = new Random();
-    Problem<T> problem = (Problem<T>) new KnapsackProblem(rand);
+    Problem<T> problem = (Problem<T>) new TSPProblem(rand);
 
-    private Chromosome<T>[] chromosome = null;
+    private Chromosome<T>[] chromosomes = null;
     private int chromosomeSize = 6;
     private Chromosome<T>[] springs = new Chromosome[4];
-    private double crossoverRate = 0.75d;
-    private double mutationRate = 0.1d;
-    private int generationSize = 2;
-    public GeneticAlgorithm() {
-        rand.setSeed(2);
-        
-        generateChromosome();
-        problem.calculateFitness(chromosome);
-        printPopulation("初代");
+    private double crossoverRate = 0.75;
+    private double mutationRate = 0.1;
+    private int generationSize = 10;
 
-        for (int gen = 1; gen <= generationSize; gen++) {
-            evolveOneGeneration();
-            printPopulation("第 " + gen + " 代");
+    public GeneticAlgorithm() {
+
+        int numberOfGeneration = 1;
+
+        rand.setSeed(1);
+
+        generateChromosome();
+
+        int i = 0;
+        for (Chromosome<T> chr: chromosomes) {
+            System.out.print(i + "條染色體:" + Arrays.toString(chr.getGenes()));
+            System.out.println("\t" + chr.getFitnessValue());
+            i++;
+        }
+
+        while (numberOfGeneration <= generationSize) {
+            System.out.println("\n 第 " + numberOfGeneration + " 代");
+
+            calculateFitnessValue();
+
+            selection();
+            System.out.println("\nSelection 選擇結果");
+            i = 0;
+            for (Chromosome<T> spr : springs) {
+                System.out.print(i + "條染色體:" + Arrays.toString(spr.getGenes()));
+                System.out.println("\t" + spr.getFitnessValue());
+                i++;
+            }
+
+            crossover();
+            System.out.println("\nCrossover 交配結果");
+            i = 0;
+            for (Chromosome<T> spr : springs) {
+                System.out.print(i + "條染色體:" + Arrays.toString(spr.getGenes()));
+                System.out.println("\t" + spr.getFitnessValue());
+                i++;
+            }
+
+            mutation();
+            System.out.println("\nMutation 突變結果");
+            
+            calculateSpringFitnessValue();
+            
+            i = 0;
+            for (Chromosome<T> spr : springs) {
+                System.out.print(i + "條染色體:" + Arrays.toString(spr.getGenes()));
+                System.out.println("\t" + spr.getFitnessValue());
+                i++;
+            }
+
+            System.out.println("\n完整的 Population (10條)");
+            i = 0;
+            for (Chromosome<T> chr: chromosomes) {
+                System.out.print(i + "條染色體:" + Arrays.toString(chr.getGenes()));
+                System.out.println("\t" + chr.getFitnessValue());
+                i++;
+            }
+            for (Chromosome<T> spr : springs) {
+                System.out.print(i + "條染色體:" + Arrays.toString(spr.getGenes()));
+                System.out.println("\t" + spr.getFitnessValue());
+                i++;
+            }
+
+            updatePopulation();
+
+            System.out.println("\n第 " + numberOfGeneration + " 次最佳解: " + 
+                Arrays.toString(chromosomes[0].getGenes()) + "\t適應值: " + 
+                chromosomes[0].getFitnessValue());
+
+            numberOfGeneration++;
         }
     }
 
     public void generateChromosome() {
-        chromosome = problem.generateChromosomes(chromosomeSize);
+        chromosomes = problem.generateChromosomes(chromosomeSize);
     }
 
-    
-    private void printPopulation(String title) {
-        System.out.println("\n" + title);
-        int i = 1;
-        for (Chromosome<T> chr : chromosome) {
-            System.out.print(i + " 條染色體 : " + Arrays.toString(chr.getGenes()));
-            System.out.println(" 適應值 : " + chr.getFitnessValue());
-            i++;
+    public void calculateFitnessValue() {
+        problem.calculateFitness(chromosomes);
+    }
+
+    public void selection() {
+        LinkedList<Chromosome<T>> population = new LinkedList<>();
+        for (Chromosome<T> chr : chromosomes) {
+            population.add(chr);
+        }
+
+        for (int i = 0; i < springs.length; i++) {
+            int randomIndex = rand.nextInt(population.size());
+            Chromosome<T> selected = population.remove(randomIndex);
+            
+            springs[i] = new Chromosome<>();
+            springs[i].setGenes((T[]) selected.getGenes());
+            springs[i].setFitnessValue(selected.getFitnessValue());
         }
     }
 
-    private void evolveOneGeneration() {
+    public void crossover() {
         for (int i = 0; i < springs.length; i += 2) {
-            Chromosome<T> p1 = selectParent();
-            Chromosome<T> p2 = selectParent();
-            Chromosome<T>[] children = crossover(p1, p2);
-            mutate(children[0]);
-            mutate(children[1]);
-            springs[i] = children[0];
-            if (i + 1 < springs.length) springs[i + 1] = children[1];
+            if (rand.nextDouble() < crossoverRate) {
+                twoPointCrossover(springs[i], springs[i + 1]);
+            }
+        }
+    }
+
+    public void twoPointCrossover(Chromosome<T> chr1, Chromosome<T> chr2) {
+        int first = rand.nextInt(chr1.getGenes().length);
+        int second = rand.nextInt(chr1.getGenes().length);
+
+        if (first > second) {
+            int temp = first;
+            first = second;
+            second = temp;
         }
 
+        for (int i = first; i <= second; i++) {
+            Object temp = chr1.getGenes()[i];
+            chr1.getGenes()[i] = chr2.getGenes()[i];
+            chr2.getGenes()[i] = (T) temp;
+        }
+    }
+
+    public void mutation() {
+        for (int i = 0; i < springs.length; i++) {
+            for (int j = 0; j < springs[i].getGenes().length; j++) {
+                if (rand.nextDouble() < mutationRate) {
+                    springs[i].getGenes()[j] = problem.generateGene(j);
+                }
+            }
+        }
+    }
+
+    public void calculateSpringFitnessValue() {
         problem.calculateFitness(springs);
-
-        Chromosome<T>[] merged = (Chromosome<T>[]) new Chromosome[chromosome.length + springs.length];
-        System.arraycopy(chromosome, 0, merged, 0, chromosome.length);
-        System.arraycopy(springs, 0, merged, chromosome.length, springs.length);
-        Arrays.sort(merged, Comparator.comparingDouble(Chromosome<T>::getFitnessValue).reversed());
-
-        chromosome = (Chromosome<T>[]) new Chromosome[chromosomeSize];
-        System.arraycopy(merged, 0, chromosome, 0, chromosomeSize);
     }
 
-    private Chromosome<T> selectParent() {
-        Chromosome<T> best = null;
-        for (int i = 0; i < 3; i++) {
-            Chromosome<T> cand = chromosome[rand.nextInt(chromosome.length)];
-            if (best == null || cand.getFitnessValue() > best.getFitnessValue()) {
-                best = cand;
-            }
+    public void updatePopulation() {
+        ArrayList<Chromosome<T>> population = new ArrayList<>();
+        
+        for (Chromosome<T> chr : chromosomes) {
+            population.add(chr);
         }
-        return cloneChromosome(best);
-    }
-
-    private Chromosome<T>[] crossover(Chromosome<T> p1, Chromosome<T> p2) {
-        T[] g1 = p1.getGenes();
-        T[] g2 = p2.getGenes();
-
-        T[] c1 = g1.clone();
-        T[] c2 = g2.clone();
-
-        if (rand.nextDouble() < crossoverRate && g1.length > 1) {
-            int cut = 1 + rand.nextInt(g1.length - 1);
-            for (int i = cut; i < g1.length; i++) {
-                T tmp = c1[i];
-                c1[i] = c2[i];
-                c2[i] = tmp;
-            }
+        
+        for (Chromosome<T> spr : springs) {
+            population.add(spr);
         }
 
-        Chromosome<T> child1 = new Chromosome<>(c1);
-        child1.setGenes(c1);
-        Chromosome<T> child2 = new Chromosome<>(c2);
-        child2.setGenes(c2);
-        return new Chromosome[] { child1, child2 };
-    }
-
-    private void mutate(Chromosome<T> chr) {
-        T[] genes = chr.getGenes();
-        for (int i = 0; i < genes.length; i++) {
-            if (rand.nextDouble() < mutationRate) {
-                genes[i] = problem.generateGene(i);
+        Collections.sort(population, new Comparator<Chromosome<T>>() {
+            @Override
+            public int compare(Chromosome<T> o1, Chromosome<T> o2) {
+                if (o1.getFitnessValue() > o2.getFitnessValue()) {
+                    return 1;
+                } else if (o1.getFitnessValue() < o2.getFitnessValue()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             }
-        }
-        chr.setGenes(genes);
-    }
+        });
 
-    private Chromosome<T> cloneChromosome(Chromosome<T> src) {
-        T[] g = src.getGenes().clone();
-        Chromosome<T> copy = new Chromosome<>(g);
-        copy.setGenes(g);
-        copy.setFitnessValue(src.getFitnessValue());
-        return copy;
+        chromosomes = new Chromosome[chromosomeSize];
+
+        for (int i = 0; i < chromosomeSize; i++) {
+            chromosomes[i] = new Chromosome<>();
+            Chromosome<T> c = population.remove(0);
+            chromosomes[i].setGenes((T[]) c.getGenes());
+            chromosomes[i].setFitnessValue(c.getFitnessValue());
+        }
     }
 
     public static void main(String[] args) {
-        new GeneticAlgorithm<Boolean>();
+        new GeneticAlgorithm<Integer>();
     }
 }

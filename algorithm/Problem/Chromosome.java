@@ -8,6 +8,9 @@ public class Chromosome<T> {
         this.genes = genes;
     }
 
+    public Chromosome() {
+    }
+
     public T[] getGenes() {
         return genes;
     }

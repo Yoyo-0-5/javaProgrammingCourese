@@ -7,14 +7,15 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// import algorithm.Problem.Knapsack.KnapsackProblem;
-import algorithm.Problem.TSP.TSPProblem;
+import algorithm.Problem.Knapsack.KnapsackProblem;
+// import algorithm.Problem.TSP.TSPProblem;
 
 @SuppressWarnings({ "unchecked" })
 public class GeneticAlgorithm<T> {
     
     Random rand = new Random();
-    Problem<T> problem = (Problem<T>) new TSPProblem(rand);
+    Problem<T> problem = (Problem<T>) new KnapsackProblem(rand);
+    // Problem<T> problem = (Problem<T>) new TSPProblem(rand);
 
     private Chromosome<T>[] chromosomes = null;
     private int chromosomeSize = 6;
@@ -194,6 +195,7 @@ public class GeneticAlgorithm<T> {
     }
 
     public static void main(String[] args) {
-        new GeneticAlgorithm<Integer>();
+        new GeneticAlgorithm<Boolean>();
+        // new GeneticAlgorithm<Integer>();
     }
 }

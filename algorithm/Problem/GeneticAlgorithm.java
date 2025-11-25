@@ -175,9 +175,11 @@ public class GeneticAlgorithm<T> {
             @Override
             public int compare(Chromosome<T> o1, Chromosome<T> o2) {
                 if (o1.getFitnessValue() > o2.getFitnessValue()) {
-                    return 1;
-                } else if (o1.getFitnessValue() < o2.getFitnessValue()) {
                     return -1;
+                    // return 1;
+                } else if (o1.getFitnessValue() < o2.getFitnessValue()) {
+                    return 1;
+                    // return -1;
                 } else {
                     return 0;
                 }

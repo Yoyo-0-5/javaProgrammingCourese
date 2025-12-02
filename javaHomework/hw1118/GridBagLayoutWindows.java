@@ -69,7 +69,7 @@ public class GridBagLayoutWindows {
             {0, 1, 1, 1, 0, 0, NONE, WEST},     // label: 檔案資訊
             {0, 7, 5, 1, 1, 0, BOTH, WEST},     // label: 狀態列
             {1, 0, 4, 1, 1, 0, BOTH, WEST},     // 路徑的 TextField
-            {1, 1, 4, 1, 1, 0, BOTH, WEST},     // 檔案資訊的 TextArea
+            {1, 1, 4, 5, 1, 1, BOTH, WEST},     // 檔案資訊的 TextArea
             {1, 6, 1, 1, 1, 0, BOTH, CENTER},   // Button 開啟檔案
             {2, 6, 1, 1, 1, 0, BOTH, CENTER},   // Button 讀取內容
             {3, 6, 1, 1, 1, 0, BOTH, CENTER},   // Button 加密
@@ -156,6 +156,6 @@ public class GridBagLayoutWindows {
     }
 
     public static void main(String[] args) {
-        new GridBagLayoutWindows();
+        new GridBagLayoutWindows().run();
     }
 }

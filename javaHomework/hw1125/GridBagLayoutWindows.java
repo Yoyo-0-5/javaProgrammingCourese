@@ -1,4 +1,4 @@
-package javaHomework.hw1118;
+package javaHomework.hw1125;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 
 public class GridBagLayoutWindows {
@@ -85,7 +84,7 @@ public class GridBagLayoutWindows {
                 { 0, 7, 1, 1, 0, 0, BOTH, WEST }, // label: 檔案內容
                 { 1, 0, 4, 1, 1, 0, BOTH, WEST }, // 路徑的 TextField
                 { 1, 1, 4, 5, 1, 1, BOTH, WEST }, // 檔案資訊的 TextArea
-                // { 1, 7, 4, 7, 1, 1, BOTH, WEST }, // 檔案內容的 TextArea
+                { 1, 7, 4, 7, 1, 1, BOTH, WEST }, // 檔案內容的 TextArea
                 { 1, 6, 1, 1, 1, 0, BOTH, CENTER }, // Button 開啟檔案
                 { 2, 6, 1, 1, 1, 0, BOTH, CENTER }, // Button 讀取內容
                 { 3, 6, 1, 1, 1, 0, BOTH, CENTER }, // Button 加密
@@ -93,7 +92,7 @@ public class GridBagLayoutWindows {
         };
         dojTextFields();
         doButtonActionListener();
-        jTextFields = new JTextComponent[] { jTF_FilePathway, jTF_FileInformation};
+        jTextFields = new JComponent[] { jTF_FilePathway, jSP_FileInformation, jSP_FileContent };
         jButtonActionListener = new ActionListener[] { openFile, roadFileText, encode, decode };
         GUIComponent = new ArrayList<JComponent>();
     }
@@ -138,37 +137,37 @@ public class GridBagLayoutWindows {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("openFile");
-                // JFileChooser fc = new JFileChooser();
-                // int returnVal = fc.showOpenDialog(jframe);
-                // if (returnVal == JFileChooser.APPROVE_OPTION) {
-                //     File file = fc.getSelectedFile();
-                //     jTF_FilePathway.setText(file.getAbsolutePath());
-                // } 
-                // else {
-                //     jTF_FilePathway.setText("Open command cancelled by user.");
-                // }
+                JFileChooser fc = new JFileChooser();
+                int returnVal = fc.showOpenDialog(jframe);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    jTF_FilePathway.setText(file.getAbsolutePath());
+                } 
+                else {
+                    jTF_FilePathway.setText("Open command cancelled by user.");
+                }
             }
         };
         roadFileText = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("roadFileText");
-                // File f = new File(jTF_FilePathway.getText());
-                // StringBuilder sb = new StringBuilder();
-                // sb.append(f.getName() + "檔案資訊如下\n");
-                // sb.append("==========================\n");
-                // sb.append("檔案長度: " + f.length() + " bytes\n");
-                // sb.append("檔案或目錄: " + (f.isFile() ? "檔案" : "非檔案") + "\n");
-                // sb.append("檔案或目錄: " + (f.isDirectory() ? "目錄" : "非目錄") + "\n");
-                // sb.append("是否可讀: " + (f.canRead() ? "可讀" : "不可讀") + "\n");
-                // sb.append("是否可寫: " + (f.canWrite() ? "可寫" : "不可寫") + "\n");
-                // sb.append("是否隱藏: " + (f.isHidden() ? "是" : "否") + "\n");
-                // sb.append("最後修改日期: " + new Date(f.lastModified()) + "\n");
-                // sb.append("檔案名: " + f.getName() + "\n");
-                // sb.append("檔案路徑: " + f.getPath() + "\n");
-                // sb.append("絕對路徑: " + f.getAbsolutePath() + "\n");
-                // jTF_FileInformation.setText(sb.toString());
-                // jTF_FileContent.setText(roadData(jTF_FilePathway.getText()).toString());
+                File f = new File(jTF_FilePathway.getText());
+                StringBuilder sb = new StringBuilder();
+                sb.append(f.getName() + "檔案資訊如下\n");
+                sb.append("==========================\n");
+                sb.append("檔案長度: " + f.length() + " bytes\n");
+                sb.append("檔案或目錄: " + (f.isFile() ? "檔案" : "非檔案") + "\n");
+                sb.append("檔案或目錄: " + (f.isDirectory() ? "目錄" : "非目錄") + "\n");
+                sb.append("是否可讀: " + (f.canRead() ? "可讀" : "不可讀") + "\n");
+                sb.append("是否可寫: " + (f.canWrite() ? "可寫" : "不可寫") + "\n");
+                sb.append("是否隱藏: " + (f.isHidden() ? "是" : "否") + "\n");
+                sb.append("最後修改日期: " + new Date(f.lastModified()) + "\n");
+                sb.append("檔案名: " + f.getName() + "\n");
+                sb.append("檔案路徑: " + f.getPath() + "\n");
+                sb.append("絕對路徑: " + f.getAbsolutePath() + "\n");
+                jTF_FileInformation.setText(sb.toString());
+                jTF_FileContent.setText(roadData(jTF_FilePathway.getText()).toString());
             }
         };
         encode = new ActionListener() {

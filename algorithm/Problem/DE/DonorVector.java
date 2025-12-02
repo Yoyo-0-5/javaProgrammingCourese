@@ -3,7 +3,12 @@ package algorithm.Problem.DE;
 public class DonorVector implements Vector {
     public double[] m_vector = null;
 
-    public DonorVector(int dimension) {
+    public DonorVector() {
+
+    }
+
+    public DonorVector(double[] vector) {
+        this.m_vector = vector.clone();
     }
 
     @Override

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GridBagLayoutWindows",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1118.GridBagLayoutWindows",
+            "projectName": "javaProgrammingCourese_1af123d9"
+        },
+        {
+            "type": "java",
             "name": "FlowLayoutWindows",
             "request": "launch",
             "mainClass": "javaHomework.hw1028.FlowLayoutWindows",

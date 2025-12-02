@@ -1,7 +1,7 @@
 package algorithm.Problem.DE;
 
 import algorithm.Problem.Problem;
-
+@SuppressWarnings("rawtypes")
 public class AlogrithmParameter {
     private int m_seed = 0;
     private int m_swarmSize = 0;
@@ -11,7 +11,7 @@ public class AlogrithmParameter {
     private double m_recombinationCRfactor = 0.0d;
     private Problem m_problem = null;
 
-    public AlogrithmParameter(){
+    public AlogrithmParameter() {
         m_seed = 0;
         m_swarmSize = 0;
         m_max_generations = 0;

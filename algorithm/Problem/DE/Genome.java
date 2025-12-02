@@ -1,17 +1,17 @@
 package algorithm.Problem.DE;
 
-public class Genme implements Vector {
+public class Genome implements Vector {
     public double[] m_vector = null;
     public double m_fitnessValue = 0.0;
 
-    public Genme() {
+    public Genome() {
     }
 
-    public Genme(double[] vector) {
+    public Genome(double[] vector) {
         setVector(vector);
     }
 
-    public Genme(double[] vector, double fitnessValue) {
+    public Genome(double[] vector, double fitnessValue) {
         setVector(vector);
         setFitnessValue(fitnessValue);
     }

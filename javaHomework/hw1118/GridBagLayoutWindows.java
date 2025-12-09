@@ -4,21 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
@@ -38,10 +29,8 @@ public class GridBagLayoutWindows {
 
     private JTextField jTF_FilePathway = null;
     private JTextArea jTF_FileInformation = null;
-    private JTextArea jTF_FileContent = null;
 
-    private JScrollPane jSP_FileInformation = null;
-    private JScrollPane jSP_FileContent = null;
+    
 
     private ActionListener[] jButtonActionListener;
     private ActionListener openFile = null;
@@ -128,9 +117,6 @@ public class GridBagLayoutWindows {
     public void dojTextFields() {
         jTF_FilePathway = new JTextField("", 24);
         jTF_FileInformation = new JTextArea("");
-        jTF_FileContent = new JTextArea("");
-        jSP_FileInformation = new JScrollPane(jTF_FileInformation);
-        jSP_FileContent = new JScrollPane(jTF_FileContent);
     }
 
     public void doButtonActionListener() {
@@ -196,21 +182,6 @@ public class GridBagLayoutWindows {
         c.fill = gbcParameter[i][6];
         c.anchor = gbcParameter[i][7];
         jframe.add(GUIComponent.get(i), c);
-    }
-
-    private StringBuffer roadData(String pathway) {
-        StringBuffer sb = new StringBuffer();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(pathway)));
-            String text = "";
-            while((text = br.readLine()) != null) {
-                sb.append(text + "\n");
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb;
     }
 
     public static void main(String[] args) {

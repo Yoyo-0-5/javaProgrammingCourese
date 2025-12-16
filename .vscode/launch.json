@@ -8,6 +8,20 @@
             "type": "java",
             "name": "GridBagLayoutWindows",
             "request": "launch",
+            "mainClass": "javaHomework.hw1209.GridBagLayoutWindows",
+            "projectName": "javaProgrammingCourese_c0adb0dc"
+        },
+        {
+            "type": "java",
+            "name": "GridBagLayoutWindows",
+            "request": "launch",
+            "mainClass": "javaHomework.hw1202.GridBagLayoutWindows",
+            "projectName": "javaProgrammingCourese_c0adb0dc"
+        },
+        {
+            "type": "java",
+            "name": "GridBagLayoutWindows",
+            "request": "launch",
             "mainClass": "javaHomework.hw1125.GridBagLayoutWindows",
             "projectName": "javaProgrammingCourese_c0adb0dc"
         },

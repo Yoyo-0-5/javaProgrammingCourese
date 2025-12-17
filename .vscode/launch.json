@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DiffrentialEvolution",
+            "request": "launch",
+            "mainClass": "algorithm.DE.DiffrentialEvolution",
+            "projectName": "javaProgrammingCourese_c0adb0dc"
+        },
+        {
+            "type": "java",
             "name": "GridBagLayoutWindows",
             "request": "launch",
             "mainClass": "javaHomework.hw1209.GridBagLayoutWindows",

@@ -33,7 +33,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class GridBagLayoutWindows {
 
     private JFrame jframe;
@@ -210,6 +210,7 @@ public class GridBagLayoutWindows {
         GUIComponent = new ArrayList<JComponent>();
     }
 
+    
     public void run() {
         jframe.setSize(800, 600);
         jframe.setLayout(new GridBagLayout());
